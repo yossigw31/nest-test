@@ -15,42 +15,42 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET passwordObj)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
-  });
-  it('/ (Post passwordObj)', () => {
-    return request(app.getHttpServer())
-        .get('/')
-        .expect(200)
-        .expect('Hello World!');
-  });
-  it('/ (Put passwordObj)', () => {
-    return request(app.getHttpServer())
-        .get('/')
-        .expect(200)
-        .expect('Hello World!');
-  });
-  it('/ (Delete passwordObj)', () => {
-    return request(app.getHttpServer())
-        .get('/')
-        .expect(200)
-        .expect('Hello World!');
-  });
-
-  it('/ (create token)', () => {
-    return request(app.getHttpServer())
-        .get('/')
-        .expect(200)
-        .expect('Hello World!');
-  });
-
-  it('/ (refresh token)', () => {
-    return request(app.getHttpServer())
-        .get('/')
-        .expect(200)
-        .expect('Hello World!');
-  });
+  // it('/ (GET passwordObj)', () => {
+  //   return request(app.getHttpServer())
+  //     .get('/')
+  //     .expect(200)
+  //     .expect('Hello World!');
+  // });
+  // it('/ (Post passwordObj)', () => {
+  //   return request(app.getHttpServer())
+  //       .get('/')
+  //       .expect(200)
+  //       .expect('Hello World!');
+  // });
+  // it('/ (Put passwordObj)', () => {
+  //   return request(app.getHttpServer())
+  //       .get('/')
+  //       .expect(200)
+  //       .expect('Hello World!');
+  // });
+  // it('/ (Delete passwordObj)', () => {
+  //   return request(app.getHttpServer())
+  //       .get('/')
+  //       .expect(200)
+  //       .expect('Hello World!');
+  // });
+  //
+  // it('/ (create token)', () => {
+  //   return request(app.getHttpServer())
+  //       .get('/')
+  //       .expect(200)
+  //       .expect('Hello World!');
+  // });
+  //
+  // it('/ (refresh token)', () => {
+  //   return request(app.getHttpServer())
+  //       .get('/')
+  //       .expect(200)
+  //       .expect('Hello World!');
+  // });
 });
