@@ -1,0 +1,11 @@
+server:
+  port: 4000
+
+db: 
+  uri: mongodb://localhost:27017/nest-crud-demo
+
+jwt:
+  access_token_secret: 'supercalifragilisticexpialidocious'
+  access_token_expiration_time: '5m'
+  refresh_token_secret: 'aintnobodygottimeforthat'
+  refresh_token_expiration_time: '15h'
