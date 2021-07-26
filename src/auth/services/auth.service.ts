@@ -39,7 +39,6 @@ export class AuthService {
       private readonly jwtService: JwtService,
   ) {}
 
-  //   console.log('service signup', dto);
   async signup(dto: AuthCredentialsDto): Promise<string> {
     const { username, password } = dto;
 
@@ -61,7 +60,6 @@ export class AuthService {
   }
   //--------
   async createAccessTokenCookie(userId: string): Promise<TokenCookie> {
-    console.log('createAccessTokenCookie');
 
     // const { ACCESS_TOKEN_SECRET, ACCESS_TOKEN_EXPIRATION_TIME } = jwtConstants;
     const payload: JwtPayload = { id: userId };
@@ -104,7 +102,6 @@ export class AuthService {
   ): Promise<AuthCredentials> {
     const salt = await bcrypt.genSalt();
     const hashedRefreshToken = await bcrypt.hash(refreshToken, salt,);
-    // console.log({ salt, hashedRefreshToken });
 
     const user = await this.authCredentialModel.findByIdAndUpdate(
         userId,
@@ -156,7 +153,6 @@ export class AuthService {
   }
 
   async setNewRefreshTokenAndAccessToken(user: AuthCredentials): Promise<UserTokens>{
-    console.log('service setNewRefreshTokenAndAccessToken');
     const accessTokenCookie = await this.createAccessTokenCookie(user.id);
     const refreshTokenCookie = await this.createRefreshTokenCookie(user.id);
 

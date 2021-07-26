@@ -35,8 +35,6 @@ export class AuthController {
         @Body() dto: AuthCredentialsDto,
         @Res() res: Response,
     ): Promise<any> {
-        console.log('controller signin');
-        // console.log({ dto });
         return await this.generateTokens(dto, res);
     }
 
@@ -59,7 +57,6 @@ export class AuthController {
     @Post('/test')
     @UseGuards(AuthGuard())
     test(@GetUser() user: AuthCredentials): AuthCredentials {
-        console.log(user);
         return user;
     }
 
@@ -79,7 +76,6 @@ export class AuthController {
             accessTokenCookie.cookie,
             refreshTokenCookie.cookie,
         ]);
-        console.log('response header was set');
         return res.json({"access_token": accessTokenCookie.token, "refresh_token": refreshTokenCookie.token});
     }
 

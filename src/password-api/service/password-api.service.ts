@@ -46,7 +46,6 @@ export class PasswordApiService {
                 };
                 let options = {upsert: true, new: true, setDefaultsOnInsert: true};
                 let model = await this.passwordApisModel.findOneAndUpdate(query, update, options);
-                console.log(model);
             } catch (error) {
                 throw new InternalServerErrorException('');
             }
