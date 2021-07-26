@@ -141,7 +141,7 @@ describe('AppController (e2e)', () => {
                 })
                 .expect(201);
             expect(response.statusCode).toEqual(201);
-            
+
             response = await request(app.getHttpServer())
                 .get('/password-api')
                 .set('Authorization', `Bearer ${jwtAccessToken}`)
@@ -150,6 +150,70 @@ describe('AppController (e2e)', () => {
                 })
                 .expect(200);
             expect(response.body.password).toEqual('123456');
+        } finally {
+            await cleanUpDb(stateServiceToDelete);
+        }
+    });
+
+    it('when call update for password obj api with password that already exist for this service should return bad request', async () => {
+        let stateServiceToDelete = `yossi ${new Date().toString()}`;
+        try {
+            let response = await request(app.getHttpServer())
+                .post('/password-api')
+                .set('Authorization', `Bearer ${jwtAccessToken}`)
+                .send({
+                    "service": stateServiceToDelete,
+                    "password": "123456"
+                })
+                .expect(201);
+            expect(response.statusCode).toEqual(201);
+
+            response = await request(app.getHttpServer())
+                .put('/password-api')
+                .set('Authorization', `Bearer ${jwtAccessToken}`)
+                .send({
+                    "service": stateServiceToDelete,
+                    "password":"123456"
+                })
+                .expect(400);
+            expect(response.statusCode).toEqual(400);
+            expect(response.body.message).toEqual("old password allready exist");
+        } finally {
+            await cleanUpDb(stateServiceToDelete);
+        }
+    });
+
+    it('when call update for password obj api with password that not exist for this service should return 200', async () => {
+        let stateServiceToDelete = `yossi ${new Date().toString()}`;
+        try {
+            let response = await request(app.getHttpServer())
+                .post('/password-api')
+                .set('Authorization', `Bearer ${jwtAccessToken}`)
+                .send({
+                    "service": stateServiceToDelete,
+                    "password": "123456"
+                })
+                .expect(201);
+            expect(response.statusCode).toEqual(201);
+
+            response = await request(app.getHttpServer())
+                .put('/password-api')
+                .set('Authorization', `Bearer ${jwtAccessToken}`)
+                .send({
+                    "service": stateServiceToDelete,
+                    "password":"12345678"
+                })
+                .expect(200);
+            expect(response.statusCode).toEqual(200);
+
+            response = await request(app.getHttpServer())
+                .get('/password-api')
+                .set('Authorization', `Bearer ${jwtAccessToken}`)
+                .send({
+                    "service": stateServiceToDelete,
+                })
+                .expect(200);
+            expect(response.body.password).toEqual('12345678');
         } finally {
             await cleanUpDb(stateServiceToDelete);
         }
